@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HardwareController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -17,13 +18,18 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
+    return Inertia::render('HardwareHomepage', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
 });
+Route::get('HomePage',[HardwareController::class, 'HomePage'])->name('HomePage');
+Route::get('About',[HardwareController::class, 'About'])->name('About');
+Route::get('Products',[HardwareController::class, 'Products'])->name('Products');
+Route::get('ContactUs',[HardwareController::class, 'ContactUs'])->name('ContactUs');
+Route::get('BuildingBlocks',[HardwareController::class, 'BuildingBlocks'])->name('BuildingBlocks');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
