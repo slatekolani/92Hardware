@@ -28,4 +28,8 @@ class HardwareController extends Controller
     {
         return Inertia::render('Webpages/Services/BuildingBlocks');
     }
+    public function HardwareDealership() : Response
+    {
+        return Inertia::render('Webpages/Services/HardwareDealership');
+    }
 }

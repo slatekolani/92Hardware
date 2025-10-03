@@ -117,7 +117,9 @@ export default function Navigation({
           <div className="hidden md:flex items-center space-x-2">
             {[
               { name: 'Home', href: '/HomePage' },
+              { name: 'About', href: '/About' },
               { name: 'Products', href: '/Products' },
+              
             ].map((item) => (
               <Link key={item.name} href={item.href}>
                 <motion.div
@@ -211,7 +213,6 @@ export default function Navigation({
             </div>
 
             {[
-              { name: 'About', href: '/About' },
               { name: 'Contact', href: '/ContactUs' },
             ].map((item) => (
               <Link key={item.name} href={item.href}>

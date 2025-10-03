@@ -3,7 +3,7 @@ import { Link } from '@inertiajs/react';
 import Navigation from '@/Components/Navigation';
 import Footer from '@/Components/Footer';
 import { motion, useInView, Variants, useMotionValue, useTransform } from 'framer-motion';
-import { Phone, Mail, MapPin, BrickWall, Layers, ShoppingCart, ArrowRight, Sparkles, Star } from 'lucide-react';
+import { Phone, Mail, MapPin, Hammer, Wrench, Truck, ArrowRight, Sparkles, Star, ShoppingCart } from 'lucide-react';
 
 interface Product {
   id: number;
@@ -18,20 +18,20 @@ interface CartItem extends Product {
   quantity: number;
 }
 
-export default function BuildingBlocks() {
+export default function HardwareDealership() {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [searchResults, setSearchResults] = useState<Product[]>([]);
-  const [addedBlockId, setAddedBlockId] = useState<number | null>(null);
+  const [addedProductId, setAddedProductId] = useState<number | null>(null);
 
   const heroRef = useRef(null);
   const servicesRef = useRef(null);
-  const blocksRef = useRef(null);
+  const productsRef = useRef(null);
   const contactRef = useRef(null);
 
   const isHeroInView = useInView(heroRef, { once: true, margin: '-100px' });
   const isServicesInView = useInView(servicesRef, { once: true, margin: '-100px' });
-  const isBlocksInView = useInView(blocksRef, { once: true, margin: '-100px' });
+  const isProductsInView = useInView(productsRef, { once: true, margin: '-100px' });
   const isContactInView = useInView(contactRef, { once: true, margin: '-100px' });
 
   const scrollY = useMotionValue(0);
@@ -65,79 +65,109 @@ export default function BuildingBlocks() {
     },
   };
 
-  const blockTypes: Product[] = [
+  const hardwareProducts: Product[] = [
     {
       id: 1,
-      name: 'Standard Concrete Block',
-      price: 'TSh 5,000/Block',
-      rating: 4.5,
-      image: 'https://images.unsplash.com/photo-1657007508392-d68322544f70?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0',
-      category: 'Structural',
+      name: 'Heavy Duty Hammer',
+      price: 'TSh 50,000',
+      rating: 4.9,
+      image: 'https://images.unsplash.com/photo-1607870411590-d5e9e06da09a?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      category: 'Hand Tools',
     },
     {
       id: 2,
-      name: 'Paving Block',
-      price: 'TSh 3,000/Block',
-      rating: 4.0,
-      image: 'https://images.unsplash.com/photo-1691762523478-88af52155f5a?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0',
-      category: 'Paving',
+      name: 'Portland Cement 50kg',
+      price: 'TSh 25,000',
+      rating: 4.7,
+      image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80',
+      category: 'Building Materials',
     },
     {
       id: 3,
-      name: 'Hollow Concrete Block',
-      price: 'TSh 5,000/Block',
-      rating: 4.2,
-      image: 'https://images.unsplash.com/photo-1650460533962-601b36580ef4?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0',
-      category: 'Non-Structural',
+      name: 'Adjustable Wrench Set',
+      price: 'TSh 70,000',
+      rating: 4.6,
+      image: 'https://plus.unsplash.com/premium_photo-1723874673961-a099a9ec566d?q=80&w=868&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      category: 'Hand Tools',
+    },
+    {
+      id: 4,
+      name: 'Rebar Steel Rod 12mm',
+      price: 'TSh 15,000/m',
+      rating: 4.8,
+      image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80',
+      category: 'Building Materials',
+    },
+    {
+      id: 5,
+      name: 'Power Drill Kit',
+      price: 'TSh 350,000',
+      rating: 4.8,
+      image: 'https://images.unsplash.com/photo-1504148455328-c376907d081c?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80',
+      category: 'Power Tools',
+    },
+    {
+      id: 6,
+      name: 'PVC Pipe 2 inch',
+      price: 'TSh 25,000',
+      rating: 4.4,
+      image: 'https://plus.unsplash.com/premium_photo-1661577094877-725f859aff3e?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8UFZDJTIwUGlwZXxlbnwwfHwwfHx8MA%3D%3D',
+      category: 'Plumbing',
     },
   ];
 
   const services = [
     {
-      icon: BrickWall,
-      title: 'Custom Block Manufacturing',
-      description: 'We produce concrete blocks tailored to your project specifications, ensuring strength and durability.',
+      icon: Hammer,
+      title: 'Tool & Equipment Supply',
+      description: 'Comprehensive range of hand tools, power tools, and construction equipment for all your projects.',
       gradient: 'from-purple-500 to-blue-500',
     },
     {
-      icon: Layers,
-      title: 'Bulk Production',
-      description: 'High-volume production for large-scale construction projects with fast turnaround times.',
+      icon: Wrench,
+      title: 'Building Materials',
+      description: 'Quality cement, steel, sand, and other essential materials sourced directly for reliability.',
       gradient: 'from-blue-500 to-cyan-500',
+    },
+    {
+      icon: Truck,
+      title: 'Delivery & Logistics',
+      description: 'Fast and reliable delivery services across Tanzania for your hardware needs.',
+      gradient: 'from-green-500 to-emerald-500',
     },
   ];
 
-  const addToCart = (block: Product) => {
-    console.log('BuildingBlocks.tsx: Adding to cart:', block.name);
+  const addToCart = (product: Product) => {
+    console.log('HardwareDealership.tsx: Adding to cart:', product.name);
     setCartItems(prev => {
-      const existingItem = prev.find(item => item.id === block.id);
+      const existingItem = prev.find(item => item.id === product.id);
       if (existingItem) {
         return prev.map(item =>
-          item.id === block.id ? { ...item, quantity: item.quantity + 1 } : item
+          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
         );
       }
-      return [...prev, { ...block, quantity: 1 }];
+      return [...prev, { ...product, quantity: 1 }];
     });
-    setAddedBlockId(block.id);
-    setTimeout(() => setAddedBlockId(null), 1000);
+    setAddedProductId(product.id);
+    setTimeout(() => setAddedProductId(null), 1000);
   };
 
-  const updateCartQuantity = (blockId: number, newQuantity: number) => {
-    console.log('BuildingBlocks.tsx: Updating quantity for blockId:', blockId, 'to:', newQuantity);
+  const updateCartQuantity = (productId: number, newQuantity: number) => {
+    console.log('HardwareDealership.tsx: Updating quantity for productId:', productId, 'to:', newQuantity);
     if (newQuantity <= 0) {
-      setCartItems(prev => prev.filter(item => item.id !== blockId));
+      setCartItems(prev => prev.filter(item => item.id !== productId));
     } else {
       setCartItems(prev =>
         prev.map(item =>
-          item.id === blockId ? { ...item, quantity: newQuantity } : item
+          item.id === productId ? { ...item, quantity: newQuantity } : item
         )
       );
     }
   };
 
-  const removeFromCart = (blockId: number) => {
-    console.log('BuildingBlocks.tsx: Removing from cart, blockId:', blockId);
-    setCartItems(prev => prev.filter(item => item.id !== blockId));
+  const removeFromCart = (productId: number) => {
+    console.log('HardwareDealership.tsx: Removing from cart, productId:', productId);
+    setCartItems(prev => prev.filter(item => item.id !== productId));
   };
 
   const getTotalItems = () => {
@@ -147,14 +177,14 @@ export default function BuildingBlocks() {
   const getTotalPrice = () => {
     return cartItems
       .reduce((total, item) => {
-        const price = parseFloat(item.price.replace('TSh ', '').replace('/Block', '').replace(',', ''));
+        const price = parseFloat(item.price.replace('TSh ', '').replace('/m', '').replace(',', ''));
         return total + price * item.quantity;
       }, 0)
       .toLocaleString('en-TZ', { style: 'currency', currency: 'TZS' });
   };
 
   const completeOrder = () => {
-    console.log('BuildingBlocks.tsx: Completing order with cart:', cartItems);
+    console.log('HardwareDealership.tsx: Completing order with cart:', cartItems);
     if (cartItems.length === 0) {
       alert('Your cart is empty!');
       return;
@@ -171,20 +201,20 @@ export default function BuildingBlocks() {
   };
 
   const handleSearch = (query: string) => {
-    console.log('BuildingBlocks.tsx: Handling search with query:', query);
+    console.log('HardwareDealership.tsx: Handling search with query:', query);
     setSearchQuery(query);
     if (query.trim() === '') {
       setSearchResults([]);
     } else {
-      const results = blockTypes.filter(block =>
-        block.name.toLowerCase().includes(query.toLowerCase()) ||
-        block.category.toLowerCase().includes(query.toLowerCase())
+      const results = hardwareProducts.filter(product =>
+        product.name.toLowerCase().includes(query.toLowerCase()) ||
+        product.category.toLowerCase().includes(query.toLowerCase())
       );
       setSearchResults(results);
     }
   };
 
-  const filteredBlocks = searchResults.length > 0 ? searchResults : blockTypes;
+  const filteredProducts = searchResults.length > 0 ? searchResults : hardwareProducts;
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -205,7 +235,7 @@ export default function BuildingBlocks() {
       <div ref={heroRef} className="relative h-[600px] overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: 'ur[](https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80)' }}
+          style={{ backgroundImage: 'ur[](https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80)' }}
         >
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40"></div>
         </div>
@@ -218,38 +248,38 @@ export default function BuildingBlocks() {
           >
             <motion.div variants={fadeInUp} className="flex items-center justify-center mb-6">
               <Sparkles className="h-8 w-8 text-purple-400 mr-3" />
-              <span className="text-purple-300 font-semibold text-lg tracking-wider">BUILDING BLOCKS</span>
+              <span className="text-purple-300 font-semibold text-lg tracking-wider">HARDWARE DEALERSHIP</span>
             </motion.div>
             <motion.h1
               variants={fadeInUp}
               className="text-5xl md:text-7xl font-bold mb-6"
             >
-              Quality <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">Concrete Blocks</span>
+              Your Trusted <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">Hardware Partner</span>
             </motion.h1>
             <motion.p
               variants={fadeInUp}
               className="text-xl md:text-2xl opacity-90 mb-10 leading-relaxed"
             >
-              High-quality concrete blocks manufactured to meet your construction needs in Tanzania
+              Complete range of tools, materials, and supplies for all your construction and DIY needs in Tanzania
             </motion.p>
             <motion.div
               variants={fadeInUp}
               className="flex flex-col sm:flex-row gap-4 justify-center"
             >
-              <Link href="#blocks">
+              <Link href="#products">
                 <motion.button
                   className="group bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-bold py-4 px-8 rounded-full shadow-2xl relative overflow-hidden"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
                   <span className="relative z-10 flex items-center justify-center">
-                    Explore Blocks
+                    Explore Products
                     <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                   </span>
                   <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
                 </motion.button>
               </Link>
-              <Link href="/contact">
+              <Link href="/ContactUs">
                 <motion.button
                   className="group border-2 border-white text-white hover:bg-white hover:text-purple-900 font-bold py-4 px-8 rounded-full transition-all"
                   whileHover={{ scale: 1.05 }}
@@ -265,13 +295,13 @@ export default function BuildingBlocks() {
           style={{ y: y1 }}
           className="absolute top-20 left-10 opacity-20"
         >
-          <BrickWall className="h-12 w-12 text-white" />
+          <Hammer className="h-12 w-12 text-white" />
         </motion.div>
         <motion.div
           style={{ y: y2 }}
           className="absolute bottom-32 right-16 opacity-20"
         >
-          <Layers className="h-16 w-16 text-white" />
+          <Wrench className="h-16 w-16 text-white" />
         </motion.div>
       </div>
 
@@ -284,21 +314,21 @@ export default function BuildingBlocks() {
             className="text-center mb-16"
           >
             <motion.div variants={fadeInUp} className="flex items-center justify-center mb-6">
-              <BrickWall className="h-8 w-8 text-purple-600 mr-3" />
+              <Truck className="h-8 w-8 text-purple-600 mr-3" />
               <span className="text-purple-600 font-semibold text-lg">Our Services</span>
             </motion.div>
             <motion.h2 variants={fadeInUp} className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-              Manufacturing <span className="bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">Excellence</span>
+              Complete <span className="bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">Solutions</span>
             </motion.h2>
             <motion.p variants={fadeInUp} className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Custom solutions for your construction projects
+              From supply to delivery, we've got you covered for all hardware needs
             </motion.p>
           </motion.div>
           <motion.div
             initial="hidden"
             animate={isServicesInView ? 'visible' : 'hidden'}
             variants={staggerContainer}
-            className="grid grid-cols-1 md:grid-cols-2 gap-8"
+            className="grid grid-cols-1 md:grid-cols-3 gap-8"
           >
             {services.map((service, index) => (
               <motion.div
@@ -327,34 +357,34 @@ export default function BuildingBlocks() {
         <div className="absolute bottom-20 right-10 w-40 h-40 bg-gradient-to-br from-pink-200 to-purple-200 rounded-full opacity-20 blur-2xl"></div>
       </div>
 
-      <div id="blocks" ref={blocksRef} className="py-24 bg-gray-50 relative overflow-hidden">
+      <div id="products" ref={productsRef} className="py-24 bg-gray-50 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial="hidden"
-            animate={isBlocksInView ? 'visible' : 'hidden'}
+            animate={isProductsInView ? 'visible' : 'hidden'}
             variants={staggerContainer}
             className="text-center mb-16"
           >
             <motion.div variants={fadeInUp} className="flex items-center justify-center mb-6">
-              <Layers className="h-8 w-8 text-purple-600 mr-3" />
-              <span className="text-purple-600 font-semibold text-lg">Our Blocks</span>
+              <ShoppingCart className="h-8 w-8 text-purple-600 mr-3" />
+              <span className="text-purple-600 font-semibold text-lg">Featured Products</span>
             </motion.div>
             <motion.h2 variants={fadeInUp} className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-              Premium <span className="bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">Block Types</span>
+              Our <span className="bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">Hardware Range</span>
             </motion.h2>
             <motion.p variants={fadeInUp} className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Choose from our range of high-quality concrete blocks
+              Wide selection of tools and materials for every project
             </motion.p>
           </motion.div>
           <motion.div
             initial="hidden"
-            animate={isBlocksInView ? 'visible' : 'hidden'}
+            animate={isProductsInView ? 'visible' : 'hidden'}
             variants={staggerContainer}
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
           >
-            {filteredBlocks.map((block, index) => (
+            {filteredProducts.map((product, index) => (
               <motion.div
-                key={block.id}
+                key={product.id}
                 custom={index}
                 variants={fadeInUp}
                 className="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 relative overflow-hidden"
@@ -362,42 +392,44 @@ export default function BuildingBlocks() {
               >
                 <div className="relative h-48 overflow-hidden rounded-xl mb-4">
                   <motion.img
-                    src={block.image}
-                    alt={block.name}
+                    src={product.image}
+                    alt={product.name}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                     whileHover={{ scale: 1.05 }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-purple-600 transition-colors">
-                  {block.name}
+                  {product.name}
                 </h3>
-                <p className="text-gray-600 text-sm mb-2">{block.category}</p>
+                <p className="text-gray-600 text-sm mb-2">{product.category}</p>
                 <div className="flex items-center mb-3">
                   {[...Array(5)].map((_, i) => (
                     <Star
                       key={i}
-                      className={`h-4 w-4 ${i < Math.round(block.rating) ? 'text-yellow-400 fill-current' : 'text-gray-300'}`}
+                      className={`h-4 w-4 ${i < Math.round(product.rating) ? 'text-yellow-400 fill-current' : 'text-gray-300'}`}
                     />
                   ))}
-                  <span className="ml-2 text-sm text-gray-600">{block.rating}</span>
+                  <span className="ml-2 text-sm text-gray-600">{product.rating}</span>
                 </div>
-                <p className="text-purple-600 font-semibold text-lg mb-4">{block.price}</p>
+                <p className="text-purple-600 font-semibold text-lg mb-4">{product.price}</p>
                 <motion.button
-                  onClick={() => addToCart(block)}
+                  onClick={() => addToCart(product)}
                   className={`group w-full font-medium py-3 px-4 rounded-full shadow-lg relative overflow-hidden transition-opacity ${
-                    addedBlockId === block.id
+                    addedProductId === product.id
                       ? 'bg-green-600 text-white opacity-75 cursor-not-allowed'
                       : 'bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white'
                   }`}
                   whileTap={{ scale: 0.95 }}
-                  disabled={addedBlockId === block.id}
+                  disabled={addedProductId === product.id}
                 >
                   <span className="relative z-10 flex items-center justify-center">
-                    {addedBlockId === block.id ? 'Added!' : 'Add to Cart'}
+                    {addedProductId === product.id ? 'Added!' : 'Add to Cart'}
                     <ShoppingCart className="ml-2 h-5 w-5" />
                   </span>
-               
+                  {addedProductId !== product.id && (
+                    <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                  )}
                 </motion.button>
                 <div className="absolute inset-0 bg-gradient-to-br from-purple-500 to-blue-500 opacity-0 group-hover:opacity-5 transition-opacity duration-500 rounded-2xl"></div>
               </motion.div>
@@ -406,7 +438,7 @@ export default function BuildingBlocks() {
           {cartItems.length > 0 && (
             <motion.div
               initial={{ opacity: 0, y: 30 }}
-              animate={isBlocksInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              animate={isProductsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ delay: 0.8 }}
               className="text-center mt-12"
             >
@@ -441,7 +473,7 @@ export default function BuildingBlocks() {
               Get in <span className="bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">Touch</span>
             </motion.h2>
             <motion.p variants={fadeInUp} className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Reach out for more information about our manufacturing services
+              Reach out for inquiries about our hardware supplies and services
             </motion.p>
           </motion.div>
           <motion.div

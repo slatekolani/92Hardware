@@ -30,6 +30,7 @@ Route::get('About',[HardwareController::class, 'About'])->name('About');
 Route::get('Products',[HardwareController::class, 'Products'])->name('Products');
 Route::get('ContactUs',[HardwareController::class, 'ContactUs'])->name('ContactUs');
 Route::get('BuildingBlocks',[HardwareController::class, 'BuildingBlocks'])->name('BuildingBlocks');
+Route::get('HardwareDealership',[HardwareController::class, 'HardwareDealership'])->name('HardwareDealership');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

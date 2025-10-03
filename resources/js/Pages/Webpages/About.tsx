@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import { Link } from '@inertiajs/react';
 import Navigation from '@/Components/Navigation';
 import Footer from '@/Components/Footer';
 import { motion, useInView, Variants, TargetAndTransition, useMotionValue, useTransform } from 'framer-motion';
@@ -234,7 +235,7 @@ export default function About() {
       <div ref={heroRef} className="relative h-[600px] overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80)' }}
+          style={{ backgroundImage: 'ur[](https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80)' }}
         >
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40"></div>
         </div>
@@ -270,25 +271,17 @@ export default function About() {
               variants={fadeInUp}
               className="flex flex-col sm:flex-row gap-4 justify-center"
             >
-              <motion.button
-                className="group bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-bold py-4 px-8 rounded-full shadow-2xl relative overflow-hidden"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <span className="relative z-10 flex items-center justify-center">
-                  Our Journey
-                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-              </motion.button>
+             
               
-              <motion.button
-                className="group border-2 border-white text-white hover:bg-white hover:text-purple-900 font-bold py-4 px-8 rounded-full transition-all"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Contact Us
-              </motion.button>
+              <Link href="/ContactUs">
+                <motion.button
+                  className="group border-2 border-white text-white hover:bg-white hover:text-purple-900 font-bold py-4 px-8 rounded-full transition-all"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Contact Us
+                </motion.button>
+              </Link>
             </motion.div>
           </motion.div>
         </div>
@@ -636,103 +629,7 @@ export default function About() {
           <div className="absolute bottom-20 right-20 w-32 h-32 border border-white rounded-full"></div>
           <div className="absolute top-32 right-32 w-16 h-16 border border-white rounded-full"></div>
         </div>
-      </div>
-
-      {/* Team Section */}
-      <div ref={teamRef} className="py-24 bg-gray-50 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial="hidden"
-            animate={isTeamInView ? "visible" : "hidden"}
-            variants={staggerContainer}
-            className="text-center mb-16"
-          >
-            <motion.div variants={fadeInUp} className="flex items-center justify-center mb-6">
-              <Users className="h-8 w-8 text-purple-600 mr-3" />
-              <span className="text-purple-600 font-semibold text-lg">Meet the Team</span>
-            </motion.div>
-            <motion.h2 variants={fadeInUp} className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-              The People Behind <span className="bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">Your Success</span>
-            </motion.h2>
-            <motion.p variants={fadeInUp} className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Our dedicated team of experts is here to help you every step of the way
-            </motion.p>
-          </motion.div>
-
-          <motion.div
-            initial="hidden"
-            animate={isTeamInView ? "visible" : "hidden"}
-            variants={staggerContainer}
-            className="grid grid-cols-1 md:grid-cols-3 gap-10"
-          >
-            {team.map((member, index) => (
-              <motion.div
-                key={index}
-                variants={fadeInUp}
-                className="group relative"
-                whileHover={{ y: -10 }}
-              >
-                <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100">
-                  {/* Image */}
-                  <div className="relative h-72 overflow-hidden">
-                    <motion.img 
-                      src={member.image} 
-                      alt={member.name}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                      whileHover={{ scale: 1.05 }}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                    
-                    {/* Stats Overlay */}
-                    <div className="absolute bottom-4 left-4 right-4 flex justify-between">
-                      {Object.entries(member.stats).map(([key, value], statIndex) => (
-                        <div key={statIndex} className="bg-white/95 backdrop-blur-sm rounded-xl px-4 py-2">
-                          <div className="text-sm font-bold text-purple-600">{value}</div>
-                          <div className="text-xs text-gray-600 capitalize">{key}</div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Content */}
-                  <div className="p-8">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-2 group-hover:text-purple-600 transition-colors">
-                      {member.name}
-                    </h3>
-                    <p className="text-purple-600 font-semibold mb-4">{member.role}</p>
-                    <p className="text-gray-600 leading-relaxed">{member.description}</p>
-                  </div>
-
-                  {/* Decorative Element */}
-                  <div className="absolute top-4 right-4 w-12 h-12 bg-gradient-to-br from-purple-500 to-blue-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-
-          {/* Join Our Team CTA */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isTeamInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ delay: 0.8 }}
-            className="text-center mt-16"
-          >
-            <div className="bg-gradient-to-r from-purple-100 to-blue-100 rounded-3xl p-10 inline-block">
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Want to Join Our Team?</h3>
-              <p className="text-gray-600 mb-6 max-w-2xl">
-                We're always looking for passionate individuals who share our values and want to make a difference
-              </p>
-              <motion.button
-                className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-bold py-3 px-8 rounded-full shadow-lg"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                View Open Positions
-              </motion.button>
-            </div>
-          </motion.div>
-        </div>
-      </div>
+      </div>      
 
       {/* Company Culture Section */}
       <div ref={cultureRef} className="py-24 bg-white relative overflow-hidden">
@@ -777,66 +674,6 @@ export default function About() {
               </motion.div>
             ))}
           </motion.div>
-        </div>
-      </div>
-
-      {/* Testimonial Section */}
-      <div className="py-24 bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 relative overflow-hidden">
-        <div className="absolute inset-0 bg-black/20"></div>
-        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <div className="bg-white/10 backdrop-blur-md rounded-3xl p-12 border border-white/20">
-              <div className="flex justify-center mb-6">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="h-8 w-8 text-yellow-400 fill-current mx-1" />
-                ))}
-              </div>
-              
-              <blockquote className="text-2xl md:text-3xl text-white mb-8 leading-relaxed italic">
-                "92 Hardware has been our trusted partner for over 10 years. Their commitment to quality and customer service is unmatched in Tanzania."
-              </blockquote>
-              
-              <div className="flex items-center justify-center space-x-4">
-                <img 
-                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&auto=format&fit=crop&q=60"
-                  alt="Customer"
-                  className="w-16 h-16 rounded-full border-4 border-white/30"
-                />
-                <div className="text-left">
-                  <div className="text-white font-bold text-lg">John Mwangi</div>
-                  <div className="text-purple-300">Construction Manager, BuildRight Ltd</div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Floating Elements */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {[...Array(8)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-2 h-2 bg-white/30 rounded-full"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-              }}
-              animate={{
-                y: [-20, 20, -20],
-                opacity: [0.3, 0.8, 0.3],
-              }}
-              transition={{
-                duration: 3 + Math.random() * 2,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            />
-          ))}
         </div>
       </div>
 
@@ -920,55 +757,19 @@ export default function About() {
             variants={fadeInUp}
             className="flex flex-col sm:flex-row gap-6 justify-center"
           >
-            <motion.button
-              className="group bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 hover:from-purple-700 hover:via-pink-700 hover:to-blue-700 text-white font-bold py-4 px-10 rounded-full shadow-2xl hover:shadow-purple-500/25 relative overflow-hidden"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <span className="relative z-10 flex items-center justify-center">
-                Get in Touch
-                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              </span>
-              <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-            </motion.button>
-            
-            <motion.button
-              className="group border-2 border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white font-bold py-4 px-10 rounded-full transition-all"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <span className="flex items-center justify-center">
-                <MapPin className="mr-2 h-5 w-5" />
-                Get Directions
-              </span>
-            </motion.button>
-          </motion.div>
-
-          {/* Operating Hours */}
-          <motion.div
-            variants={fadeInUp}
-            className="mt-16 max-w-2xl mx-auto"
-          >
-            <div className="bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-2xl p-8 shadow-2xl">
-              <div className="flex items-center justify-center mb-6">
-                <Clock className="h-8 w-8 mr-3" />
-                <h3 className="text-2xl font-bold">Operating Hours</h3>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
-                <div>
-                  <div className="font-bold mb-2">Monday - Friday</div>
-                  <div className="text-purple-100">8:00 AM - 6:00 PM</div>
-                </div>
-                <div>
-                  <div className="font-bold mb-2">Saturday</div>
-                  <div className="text-purple-100">8:00 AM - 4:00 PM</div>
-                </div>
-                <div>
-                  <div className="font-bold mb-2">Sunday</div>
-                  <div className="text-purple-100">Closed</div>
-                </div>
-              </div>
-            </div>
+            <Link href="/ContactUs">
+              <motion.button
+                className="group bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 hover:from-purple-700 hover:via-pink-700 hover:to-blue-700 text-white font-bold py-4 px-10 rounded-full shadow-2xl hover:shadow-purple-500/25 relative overflow-hidden"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <span className="relative z-10 flex items-center justify-center">
+                  Get in Touch
+                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                </span>
+                <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+              </motion.button>
+            </Link>
           </motion.div>
         </div>
 
